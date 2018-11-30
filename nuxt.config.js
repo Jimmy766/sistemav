@@ -52,8 +52,13 @@ module.exports = {
   */
   modules: [
     // Doc: https://github.com/nuxt-community/axios-module#usage
+    ['@nuxtjs/pwa', { icon: false }],
     '@nuxtjs/axios'
   ],
+  workbox: {
+    dev: true,
+    debug: true
+  },
   /*
   ** Axios module configuration
   */
@@ -82,7 +87,7 @@ module.exports = {
     /*
     ** You can extend webpack config here
     */
-
+    vendor: ['vue-barcode-scanner'],
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {

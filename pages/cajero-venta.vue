@@ -1,9 +1,9 @@
 <template>
-  <v-container >
-    <v-layout 
+  <v-container>
+    <v-layout
       wrap
       row>
-      <v-flex 
+      <v-flex
         md6
 
       >
@@ -11,15 +11,15 @@
           <v-layout rows>
             <v-flex md6>
               <select-input
-                :items="clientes()"
+                :items="productos"
                 sub="nombre"
                 query="codigo"
                 label1="Nit"
                 label2="Nombre"
               />
             </v-flex>
-            <v-flex 
-              md6 
+            <v-flex
+              md6
               class="margen"
             >
               <v-text-field
@@ -29,71 +29,64 @@
               />
               <v-text-field
                 readonly
-                label="Codigo de Control" />
+                label="Codigo de Control"/>
 
               <v-text-field
                 readonly
-                label="Codigo Autorizacion" />
+                label="Codigo Autorizacion"/>
 
-        </v-flex></v-layout></v-card>
+            </v-flex>
+          </v-layout>
+        </v-card>
         <v-flex
           md12
           style="height: 400px"
         >
-          <v-data-table
-            :headers="headers"
-            :items="cajero"
-            class="elevation-6"
-
-            hide-actions
-          >
-
-            <template
-              slot="items"
-              slot-scope="props"
-            >
-
-              <td class="caption">{{ props.item.nombre }}</td>
-              
-              <td class="text-xs-right">{{ props.item.cantidad }}</td>
-              <td class="text-xs-right">{{ props.item.precio }}</td>
-              <td class="text-xs-right">{{ props.item.total }}</td>
-            
-            </template>
-
-          </v-data-table>
+          <tabla-venta :ventas="ventas"/>
         </v-flex>
       </v-flex>
       <v-flex
         class="layout-margen"
         md5>
-        <v-card>
-          <v-carousel hide-controls>
-            <v-carousel-item
-              v-for="(item,i) in fotos"
-              :key="i"
-              :src="item.src"
+        <v-layout column>
+
+          <v-flex md12>
+            <v-card>
+              <v-carousel hide-controls>
+                <v-carousel-item
+                  v-for="(item,i) in fotos"
+                  :key="i"
+                  :src="item.src"
+                />
+              </v-carousel>
+
+            </v-card>
+          </v-flex>
+          <v-flex md1>
+            <fab
+              :fab="fab"
+              direction="left"
             />
-          </v-carousel>
+          </v-flex>
+        </v-layout>
+      </v-flex>
 
-
-      </v-card></v-flex>
-      
     </v-layout>
 
-
-
-      
-
   </v-container>
+
 </template>
 <script>
 import SelectInput from '../components/select-input'
+import TablaVenta from '../components/tabla-venta'
 import { mapActions, mapMutations, mapGetters } from 'vuex'
+import Fab from '../components/fab'
+
 export default {
-  components: { SelectInput },
+  components: { Fab, SelectInput, TablaVenta },
   data() {
     return {
+      fab: false,
       fotos: [
         {
           src: 'https://cdn.vuetifyjs.com/images/carousel/squirrel.jpg'
@@ -107,29 +100,25 @@ export default {
         {
           src: 'https://cdn.vuetifyjs.com/images/carousel/planet.jpg'
         }
-      ],
-      headers: [
-        {
-          text: 'Nombre',
-          align: 'left',
-          sortable: false,
-          value: 'nombre'
-        },
-
-        { text: 'Cantidad', value: 'cantidad', align: 'right' },
-        { text: 'Precio', value: 'precio', align: 'right' },
-        { text: 'Total', value: 'total', align: 'right' }
       ]
     }
+  },
+  computed: {
+    ...mapGetters({
+      productos: 'datos/getProductos',
+      getProducto: 'datos/getProducto',
+      ventas: 'cajero/getVentas'
+    })
   },
   async fetch({ store }) {
     console.log('fetch')
   },
-  computed: {},
+
   created() {
     // Add barcode scan listener and pass the callback function
     this.$barcodeScanner.init(this.onBarcodeScanned)
     console.log('created')
+    this.addVenta(this.productos[0])
   },
 
   destroyed() {
@@ -140,6 +129,10 @@ export default {
     // Create callback function to receive barcode when the scanner is already done
     onBarcodeScanned(barcode) {
       console.log(barcode)
+      let result = this.getProducto(barcode)
+      console.log(result)
+      if (result.length == 1) this.addVenta(result[0])
+      fab = true
     },
     // Reset to the last barcode before hitting enter (whatever anything in the input box)
     resetBarcode() {
@@ -147,10 +140,12 @@ export default {
       // do something...
     },
     ...mapActions({
-      inicia: 'datos/getClientes'
+      inicia: 'datos/getProductos'
     }),
-    ...mapMutations({ getClientes: 'datos/getClientes' }),
-    ...mapGetters({ clientes: 'datos/getClientes', ventas: 'cajero/getVentas' })
+    ...mapMutations({
+      addVenta: 'cajero/add',
+      uno: 'datos/setTitulo'
+    })
   }
 }
 </script>
@@ -158,14 +153,16 @@ export default {
 .v-carousel-item {
   padding: 5px;
 }
+
 .margen {
   margin: 10px;
 }
+
 .layout-margen {
   margin: 20px;
 }
-thead {
-  clear: both;
-  display: block;
+
+.fab {
+  margen: 50px;
 }
 </style>

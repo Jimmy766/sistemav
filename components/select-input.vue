@@ -9,8 +9,8 @@
           v-model="valor1"
           :items="items"
           :label="label1"
-          :item-text="query"
-          :item-value="query"
+          :item-text="[query]"
+          :item-value="[query]"
           hide-no-data
           flat
           chips
@@ -26,6 +26,7 @@
               @hook:updated="actualiza(data.item)"
             >{{ data.item[query] }}</v-chip>
           </template>
+
           <template
             slot="item"
             slot-scope="data"
@@ -37,6 +38,7 @@
               </v-list-tile-content>
             </template>
           </template>
+         
         </v-autocomplete>
       </v-flex>
       <v-flex xs6>
