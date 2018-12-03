@@ -8,10 +8,6 @@ workbox.precaching.precacheAndRoute([
     "revision": "93301f55cf9f1d3d384982260cae4989"
   },
   {
-    "url": "/_nuxt/233ec6f20b4723ce829f.js",
-    "revision": "8bd87e64c918313e9c144450595373e3"
-  },
-  {
     "url": "/_nuxt/25478b3dcc588bfc20b2.js",
     "revision": "3c9e52145bdc6a73b1b2ba328793fba4"
   },
@@ -26,6 +22,10 @@ workbox.precaching.precacheAndRoute([
   {
     "url": "/_nuxt/dc7b961a6a4e3d8b020e.js",
     "revision": "e36b1a0a9e63a8a2ac2d418f62f60cf6"
+  },
+  {
+    "url": "/_nuxt/e81e0b19b07436c3d9c5.js",
+    "revision": "26405abf5a93760d9405744c7af5b243"
   }
 ], {
   "cacheId": "practica2",
