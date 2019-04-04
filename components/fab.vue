@@ -121,6 +121,7 @@ export default {
       this.reset()
     },
     guardar() {
+      this.saveVenta()
       this.reset()
     },
     imprimir() {
@@ -163,7 +164,7 @@ export default {
       else this.recibo.imprimir()
       this.reset()
     },
-    ...mapActions({ reset: 'cajero/limpiar' })
+    ...mapActions({ reset: 'cajero/limpiar',saveVenta:'cajero/saveVenta' })
   }
 }
 </script>

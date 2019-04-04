@@ -1,16 +1,21 @@
 export const state = () => ({
   productos: [],
+  combos: [],
+  cProductos: [],
   pFiltrado: [],
   titulo: null,
   producto: null,
   nombre: null,
-  direccion: null
+  direccion: null,
+  fotos: []
 })
 
 export const mutations = {
-  setProductos(state, data) {
+  async setProductos(state, data) {
     Object.assign(state.productos, data)
     state.pFiltrado = data.slice(0, 100)
+    const c = await this.$axios.get('/combo')
+    Object.assign(state.combos, c)
   },
   setTitulo(state, data) {
     state.titulo = data

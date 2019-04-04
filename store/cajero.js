@@ -19,6 +19,9 @@ export const actions = {
   },
   setCambio({ commit }, data) {
     commit('setCambio', data)
+  },
+  saveVenta({ commit }) {
+    commit('saveVenta')
   }
 }
 export const mutations = {
@@ -57,6 +60,17 @@ export const mutations = {
   setCambio(state, data) {
     Number(state.cambio).toFixed(2)
     state.cambio = data
+  },
+  async saveVenta(state) {
+    const r = await this.$axios.post('/saveVenta', {
+      params: {
+        ventas: state.venta,
+        total: state.total,
+        efectivo: state.efectivo,
+        cambio: state.cambio
+      }
+    })
+    console.log(r)
   }
 }
 export const getters = {

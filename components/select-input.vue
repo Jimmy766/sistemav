@@ -15,7 +15,6 @@
           chips
           clearable
           append-icon="search"
-          return-object
           @input="elegido"
           @click:prepend="adicionar"
         >
@@ -116,7 +115,7 @@ export default {
     adicionar(e) {
       if (this.valor2 != undefined || this.valor2 != null) {
         const val = this.getProducto(this.valor2)
-        console.log(val)
+        console.log('venta a :' + val)
         this.addVenta(val[0])
       }
     },

@@ -160,6 +160,7 @@ margin-top: 0px;
         contentWindow.addEventListener('afterprint', () =>
           console.log('after print event!')
         )
+
         console.log('asdasdasd')
         d.print(this.$el, [this.cssText])
       }
@@ -169,7 +170,6 @@ margin-top: 0px;
 </script>
 
 <style scoped>
-  h1{
-
-  }
+h1 {
+}
 </style>

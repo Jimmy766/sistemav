@@ -147,6 +147,7 @@ export default {
       if (this.seleccionado) {
         this.quitarVenta(this.seleccionado)
         this.eliminar = false
+        this.dinero = 0
       }
     },
 
