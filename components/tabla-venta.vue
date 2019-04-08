@@ -51,7 +51,7 @@
           <v-list-tile>
             <v-list-tile-content>
               <v-text-field
-                v-model="dinero"
+                v-model="total==0?0:dinero"
                 prefix="Bs"
                 label="Efectivo"
                 type="number"
@@ -129,6 +129,7 @@ export default {
     dinero: {
       handler() {
         console.log('dinero: ' + this.dinero)
+		if(this.total==0) this.dinero=0
         this.setEfectivo(this.dinero)
       }
     }
@@ -147,7 +148,6 @@ export default {
       if (this.seleccionado) {
         this.quitarVenta(this.seleccionado)
         this.eliminar = false
-        this.dinero = 0
       }
     },
 

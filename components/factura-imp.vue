@@ -7,7 +7,7 @@
       <h4>NIT: {{ nit }}</h4>
       <h4>FACTURA N°: {{ numero }}</h4>
       <h4>AUTORIZACION N°: {{ ca }}</h4>
-      <h5>{{ etiqueta1 }}</h5>
+      <h5 style="font-weight:normal;font-size: 9px;">{{ etiqueta1 }}</h5>
       <h3>FACTURA</h3>
       <h4>ORIGINAL</h4>
       <h5 class="izquierda">
@@ -57,7 +57,8 @@
       <h5 class="izquierda">Codigo de Control: {{ cc }}</h5>
       <h5 class="izquierda">Fecha Limite de Emision: {{ fechaLimite }}</h5>
       <div class="texto" v-html="img"></div>
-      <h5>{{ etiqueta2 }}</h5>
+	  <h5> “ESTA FACTURA CONTRIBUYE AL DESARROLLO DEL PAÍS. EL USO ILÍCITO DE ÉSTA SERÁ SANCIONADO DE ACUERDO A LEY”</h5>
+      <h5 style="font-weight:normal">{{ etiqueta2 }}</h5>
     </div>
   </div>
 </template>
@@ -100,24 +101,27 @@ export default {
 .margend{
   margin-right:150px;
 }
+.izquierda,
 tr{
   text-align: left;
-
+font-size: 11px;
 }
-.izquierda,
+
 .tabla tr td,
 .tabla tr{
+font-family: Arial;
   text-align: left;
-  font-size: 6px;
+  font-size: 9px;
 }
 .dos{
-  font-size: 10px;
+  font-family: Arial;
    width: 100%;
 }
 .texto,
 h1,h2,h3,h4,h5{
+font-family: Arial;
 text-align: center;
-font-size: 6px;
+font-size: 11px;
 margin-top: 0px;
     margin-bottom: 0px;
 }

@@ -24,7 +24,7 @@ module.exports = {
 
   css: [
     '@mdi/font/css/materialdesignicons.css',
-    'material-design-icons-iconfont/dist/material-design-icons.css',
+    
     '~/assets/style/app.styl',
     '@/assets/style/scrollbar.css'
   ],
@@ -39,7 +39,7 @@ module.exports = {
   plugins: [
     '~/plugins/usb',
     '@/plugins/vuetify',
-    '@/plugins/material-icons',
+    
     '@/plugins/scrollbar',
     '@/plugins/codigo-control',
     '@/plugins/globales',
@@ -58,7 +58,8 @@ module.exports = {
     // Doc: https://github.com/nuxt-community/axios-module#usage
     ['@nuxtjs/pwa', { icon: false }],
     '@nuxtjs/axios',
-    ['@nuxtjs/moment', ['es']]
+    ['@nuxtjs/moment', ['es']],
+	['nuxt-material-design-icons']
   ],
   workbox: {
     dev: true,
@@ -69,7 +70,7 @@ module.exports = {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: 'http://127.0.0.1/sistemav/public/api/',
+    baseURL: 'http://localhost/sistemav/public/api/',
     proxyHeaders: false,
     credentials: false
   },
